@@ -35,7 +35,7 @@ My python script can now stream data into any Event Hubs instances created withi
 
 ![Screenshot 2023-08-09 184145](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/a719a059-2187-47b7-b851-47f9009b8bf0)
 
-My Stream Analytics job can now receive the streaming data. The flow of the data: Binance WebSocket API --> python script --> Event Hub instance --> Stream Analytics job
+My Stream Analytics job can now receive the streaming data. The flow of the data: Binance WebSocket API --> python script --> Event Hubs instance --> Stream Analytics job
 
 ## Configuring Stream Analytics job
 1. Add Input - streaming data from Event Hub instance
