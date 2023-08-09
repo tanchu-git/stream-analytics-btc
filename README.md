@@ -2,7 +2,7 @@
 Mini project with Azure Event Hubs and Azure Stream Analytics.
 
 ## Python script
-Binance offers a simple WebSocket API for real-time trading data. I did some light processing on the raw streaming data before sending it to Azure Event Hubs. Detailed comments in the python [script](https://github.com/tanchu-git/stream_analytics_btc/blob/main/btc_stream.py).
+Binance offers a simple WebSocket API for real-time trading data. I did some light processing on the raw streaming data before sending it to Azure Event Hubs. Detailed comments in the python [script](https://github.com/tanchu-git/stream_analytics_btc/blob/main/python_script/btc_stream.py).
 
 With the app registration process in Azure Active Directory, I registered a new application service principal object. The identity (tenant ID, client ID, client secret) of the service principal is then stored as environment variables to be accessed by the python script for authentication with Azure services.
 
