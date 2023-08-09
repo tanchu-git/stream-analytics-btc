@@ -39,8 +39,9 @@ My Stream Analytics job can now receive the streaming data. The flow of the data
 
 ## Configuring Stream Analytics job
 1. Add Input - streaming data from Event Hub instance
-2. Define Query - process of data stream with Stream Analytics Query Language, a subset of T-SQL syntax
+2. Define Query - processing of data stream with Stream Analytics Query Language, a subset of T-SQL syntax
 3. Add Output - where the processed data goes
 4. Start Stream Analytics Job
 
 ![Screenshot 2023-08-09 210547](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/b63a301e-722d-4771-b010-0b19152ce22e)
+
