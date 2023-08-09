@@ -43,6 +43,8 @@ My Stream Analytics job can now receive the streaming data. The flow of the data
 3. Add Output - where the processed data goes
 4. Start Stream Analytics Job
 
-![Screenshot 2023-08-09 210547](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/b63a301e-722d-4771-b010-0b19152ce22e)
+![Screenshot 2023-08-09 224353](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/740acae5-3002-4890-8f9f-3e2d806f3ea9)
 
 Main focus for the [query](https://github.com/tanchu-git/stream_analytics_btc/blob/main/stream_query/query.sql) is function 'AnomalyDetection_SpikeAndDip'. As the name suggest, it detects temporary anomalies in a time series event. The underlying machine learning model uses the adaptive kernel density estimation algorithm. It supports unsupervised learning and real time scoring, whereby it will learn from the data.
+
+As fun as the query was to write, you can clearly see on the test reults, it's utterly useless. Let's just blame it on bitcoin being too stable.
