@@ -41,10 +41,27 @@ My Stream Analytics job can now receive the streaming data. The flow of the data
 1. Add Input - streaming data from Event Hub instance
 2. Define Query - processing of data stream with Stream Analytics Query Language, a subset of T-SQL syntax
 3. Add Output - where the processed data goes
-4. Start Stream Analytics Job
+4. Grant the necessary access as you add input/outputs. Start Stream Analytics Job
 
-![Screenshot 2023-08-09 224353](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/740acae5-3002-4890-8f9f-3e2d806f3ea9)
+![Screenshot 2023-08-09 233103](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/5b8619eb-c195-43e7-92b8-201c882b1f23)
 
 Main focus for the [query](https://github.com/tanchu-git/stream_analytics_btc/blob/main/stream_query/query.sql) is function 'AnomalyDetection_SpikeAndDip'. As the name suggest, it detects temporary anomalies in a time series event. The underlying machine learning model uses the adaptive kernel density estimation algorithm. It supports unsupervised learning and real time scoring, whereby it will learn from the data. More details is in [stream_query](https://github.com/tanchu-git/stream_analytics_btc/blob/main/stream_query/query.sql).
 
-As fun as the query was to write, you can clearly see on the test reults, it's utterly useless. Let's just blame it on bitcoin being too stable.
+Let's go through the query results part by part-
+
+#### Raw stream data from python_app
+![Screenshot 2023-08-09 231218](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/66a1c5bd-762b-4328-a56b-8b779813069e)
+
+#### CTE with TUMBLINGWINDOW of 1 second
+![Screenshot 2023-08-09 231312](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/893a7733-ddec-40f2-ab7e-4136db0f0013)
+
+#### CTE with machine learning model applied
+![Screenshot 2023-08-09 231454](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/47160e9c-ffff-4e6d-ae50-c2c9afe4a088)
+
+#### CTE with flattened nested record
+![Screenshot 2023-08-09 231542](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/512e3d4b-b551-4c16-8ed0-f714f49ad373)
+
+#### Final result
+![Screenshot 2023-08-09 232834](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/e578c38e-fd09-4162-8b99-bbc0b46d60e5)
+
+As fun as the query was to write, it's utterly useless. Let's just blame it on bitcoin being too stable.
