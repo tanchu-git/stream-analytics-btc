@@ -1,4 +1,4 @@
-# stream_analytics_btc
+# Fun Project with Azure Stream Analytics
 Mini project with Azure Event Hubs and Azure Stream Analytics. Where I try to use Stream Analytics to analyze Bitcoin trading stream from Binance in real-time for anomalies.
 
 ## Python script
@@ -9,7 +9,7 @@ With the app registration process in Azure Active Directory, I registered a new 
 ![Screenshot 2023-08-09 183221](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/921b116a-cbc0-4234-bb3b-fa5fc353c6e5)
 
 ## Create Event Hubs namespace
-Basic tier is sufficient for my purpose.
+I will ingest events from the python script into Azure Event Hubs. Basic tier is sufficient for my purpose.
 
 ![Screenshot 2023-08-09 182328](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/8c4fa629-0498-43e3-9097-2049e2d7286b)
 
@@ -18,7 +18,7 @@ Once the namespace has been created, a Event Hubs instance needs to be created t
 ![Screenshot 2023-08-09 194056](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/1c953cdc-b6fa-4b21-b85a-99e37e63be3c)
 
 ## Create Stream Analytics job
-Create a Stream Analytics job through Azure portal. Streaming Units (SU) refers to the compute (CPU and memory), minimum amount for me. 
+Stream Analytics job will be processing the data. Streaming Units (SU) refers to the compute (CPU and memory), minimum amount for me. 
 
 ![Screenshot 2023-08-09 202445](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/f292e78e-5c42-4e13-b21b-91796ee4f471)
 
