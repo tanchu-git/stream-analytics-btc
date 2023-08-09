@@ -1,5 +1,5 @@
 # stream_analytics_btc
-Mini project with Azure Event Hubs and Azure Stream Analytics.
+Mini project with Azure Event Hubs and Azure Stream Analytics. Where I try to use Stream Analytics to analyze Bitcoin trading stream from Binance in real-time for anomalies.
 
 ## Python script
 Binance offers a simple WebSocket API for real-time trading data. I did some light processing on the raw streaming data before sending it to Azure Event Hubs. Detailed comments in [python_script](https://github.com/tanchu-git/stream_analytics_btc/blob/main/python_script/btc_stream.py).
@@ -53,13 +53,13 @@ Let's go through the query results part by part-
 ![Screenshot 2023-08-09 231218](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/66a1c5bd-762b-4328-a56b-8b779813069e)
 
 #### CTE with TUMBLINGWINDOW of 1 second
-![Screenshot 2023-08-09 231312](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/893a7733-ddec-40f2-ab7e-4136db0f0013)
+![Screenshot 2023-08-09 231312](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/a68e5498-20bb-4ee3-a885-4a2a825ff772)
 
 #### CTE with machine learning model applied
-![Screenshot 2023-08-09 231454](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/47160e9c-ffff-4e6d-ae50-c2c9afe4a088)
+![Screenshot 2023-08-09 231454](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/f22dbb13-6e45-44b6-9a60-92bbc7345141)
 
 #### CTE with flattened nested record
-![Screenshot 2023-08-09 231542](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/512e3d4b-b551-4c16-8ed0-f714f49ad373)
+![Screenshot 2023-08-09 231542](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/6bbcc052-564f-4e51-bbe4-8581428f8bd7)
 
 #### Final result
 ![Screenshot 2023-08-09 232834](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/e578c38e-fd09-4162-8b99-bbc0b46d60e5)
