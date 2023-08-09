@@ -22,7 +22,7 @@ anomaly_detection AS
 -- A nested record with 2 columns is returned. Here I'm flattening it.
 -- The computed p-value score (float) indicating how anomalous an event is.
 -- A BIGINT (0 or 1) indicating if the event was anomalous or not.
-result AS
+anomalies_result AS
 (
     SELECT
         [Trade time UTC],
@@ -36,7 +36,7 @@ result AS
 SELECT
     *
 INTO [btc-anomaly]
-FROM result
+FROM anomalies_result
     MATCH_RECOGNIZE (
         LIMIT DURATION (minute, 1)
         MEASURES
@@ -49,4 +49,4 @@ FROM result
         DEFINE
             Normal AS Normal.[Is Anomaly] = 0,
             Anomaly AS Anomaly.[Is Anomaly] = 1
-) AS T
+) AS final_result
