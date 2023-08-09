@@ -45,7 +45,7 @@ My Stream Analytics job can now receive the streaming data. The flow of the data
 
 ![Screenshot 2023-08-09 233103](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/5b8619eb-c195-43e7-92b8-201c882b1f23)
 
-Main focus for the [query](https://github.com/tanchu-git/stream_analytics_btc/blob/main/stream_query/query.sql) is function 'AnomalyDetection_SpikeAndDip'. As the name suggest, it detects temporary anomalies in a time series event. The underlying machine learning model uses the adaptive kernel density estimation algorithm. It supports unsupervised learning and real time scoring, whereby it will learn from the data. More details is in [stream_query](https://github.com/tanchu-git/stream_analytics_btc/blob/main/stream_query/query.sql).
+Main focus for the [query](https://github.com/tanchu-git/stream_analytics_btc/blob/main/stream_query/query.sql) is 'AnomalyDetection_SpikeAndDip'. As the name suggest, it detects temporary anomalies in a time series event. The underlying machine learning model uses the adaptive kernel density estimation algorithm. It supports unsupervised learning and real time scoring, whereby it will learn from the data. More details is in [stream_query](https://github.com/tanchu-git/stream_analytics_btc/blob/main/stream_query/query.sql).
 
 Let's go through the query results part by part-
 
