@@ -10,6 +10,7 @@ WITH make_incoming_rate_uniform AS
 ),
 -- 'AnomalyDetection_SpikeAndDip' detects temporary anomalies in a time series event.
 -- Using a 2 minute sliding window with a history size of 120 events. A confidence level of 98%.
+-- The lower the confidence, the higher the number of anomalies detected, and vice versa.
 anomaly_detection AS
 (
     SELECT
@@ -19,6 +20,8 @@ anomaly_detection AS
     FROM make_incoming_rate_uniform
 ),
 -- A nested record with 2 columns is returned. Here I'm flattening it.
+-- The computed p-value score (float) indicating how anomalous an event is.
+-- A BIGINT (0 or 1) indicating if the event was anomalous or not.
 result AS
 (
     SELECT
