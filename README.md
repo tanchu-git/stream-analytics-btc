@@ -1,10 +1,10 @@
 # Mini Project with Azure Stream Analytics
-Exploring and learning Azure Event Hubs and Azure Stream Analytics. Where I try to use Stream Analytics to analyze Bitcoin trading stream from Binance in real-time for anomalies.
+Exploringand learning Azure Event Hubs and Azure Stream Analytics. Where I try to use Stream Analytics to analyze Bitcoin trading stream from Binance in real-time for anomalies.
 
 ## Python script
-Binance offers a simple WebSocket API for real-time trading data. I did some light processing on the raw streaming data before sending it to Azure Event Hubs. Detailed comments in [python_script](https://github.com/tanchu-git/stream_analytics_btc/blob/main/python_script/btc_stream.py).
+Binance offers a simple WebSocket API for real-time trading data. I did some light processing on the raw streaming data before sending it to Azure Event Hubs. Detailed comments in [```python_script```](https://github.com/tanchu-git/stream_analytics_btc/blob/main/python_script/btc_stream.py).
 
-With the app registration process in Azure Active Directory, I registered a new application service principal object. The identity (tenant ID, client ID and client secret) of the service principal is then stored as environment variables to be accessed by the python script for authentication with Azure services.
+With the app registration process in Azure Active Directory, I registered a new application service principal object. The identity (```tenant ID```, ```client ID``` and ```client secret```) of the ```Service Principal``` is then stored as environment variables to be accessed by the python script for authentication with Azure services.
 
 ![Screenshot 2023-08-09 183221](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/921b116a-cbc0-4234-bb3b-fa5fc353c6e5)
 
@@ -25,19 +25,19 @@ Stream Analytics job will be processing the data. Streaming Units (SU) refers to
 ## Configuring our setup
 Managed identities from Azure Active Directory allows the different services to connect. Azure role-based access is the authorization system to manage access to Azure resources to a particular scope.
 
-#### Assigning python_app as 'Azure Event Hubs Data Sender' in Event Hubs namespace.
+Assigning ```python_app``` as ```Azure Event Hubs Data Sender``` in Event Hubs namespace.
 
 ![Screenshot 2023-08-09 183543](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/c521339e-02d6-4a18-b4f7-0c65bea65e8b)
 
 My python script can now stream data into any Event Hubs instances created within the namespace. I can limit the scope to specific Event Hub instances.
 
-#### Assigning my Stream Analytics job event_hub_stream as 'Azure Event Hubs Data Receiver' in the specific Event Hub instance
+Assigning my Stream Analytics job ```event_hub_stream``` as ```Azure Event Hubs Data Receiver``` in the specific Event Hub instance
 
 ![Screenshot 2023-08-09 184145](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/a719a059-2187-47b7-b851-47f9009b8bf0)
 
 My Stream Analytics job can now receive the streaming data from my Event Hub instance. The flow of the data:
 
-#### Binance WebSocket API --> python script --> Event Hubs instance --> Stream Analytics job --> output
+```Binance WebSocket API --> python script --> Event Hubs instance --> Stream Analytics job --> output```
 
 ## Configuring Stream Analytics job
 1. Add Input - streaming data from Event Hub instance
@@ -47,7 +47,7 @@ My Stream Analytics job can now receive the streaming data from my Event Hub ins
 
 ![Screenshot 2023-08-09 233103](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/5b8619eb-c195-43e7-92b8-201c882b1f23)
 
-Main focus for the [query](https://github.com/tanchu-git/stream_analytics_btc/blob/main/stream_query/query.sql) is 'AnomalyDetection_SpikeAndDip'. As the name suggest, it detects temporary anomalies in a time series event. The underlying machine learning model uses the adaptive kernel density estimation algorithm. It supports unsupervised learning and real time scoring, whereby it will learn from the data. More details is in [stream_query](https://github.com/tanchu-git/stream_analytics_btc/blob/main/stream_query/query.sql).
+Main focus for the [query](https://github.com/tanchu-git/stream_analytics_btc/blob/main/stream_query/query.sql) is ```AnomalyDetection_SpikeAndDip```. As the name suggest, it detects temporary anomalies in a time series event. The underlying machine learning model uses the adaptive kernel density estimation algorithm. It supports unsupervised learning and real time scoring, whereby it will learn from the data. More details is in [```stream_query```](https://github.com/tanchu-git/stream_analytics_btc/blob/main/stream_query/query.sql).
 
 ### Let's go through the different CTEs in the query -
 
