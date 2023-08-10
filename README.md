@@ -66,4 +66,4 @@ Main focus for the [query](https://github.com/tanchu-git/stream_analytics_btc/bl
 #### Final result
 ![Screenshot 2023-08-09 232834](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/e578c38e-fd09-4162-8b99-bbc0b46d60e5)
 
-As fun as the query was to write, it's utterly useless. Let's just blame it on bitcoin being too stable.
+As fun as the [query](https://github.com/tanchu-git/stream_analytics_btc/blob/main/stream_query/query.sql) was to write, it's utterly useless. Let's just blame it on bitcoin being too stable.
