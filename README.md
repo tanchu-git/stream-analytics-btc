@@ -35,7 +35,9 @@ My python script can now stream data into any Event Hubs instances created withi
 
 ![Screenshot 2023-08-09 184145](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/a719a059-2187-47b7-b851-47f9009b8bf0)
 
-My Stream Analytics job can now receive the streaming data. The flow of the data: Binance WebSocket API --> python script --> Event Hubs instance --> Stream Analytics job
+My Stream Analytics job can now receive the streaming data from my Event Hub instance. The flow of the data:
+
+#### Binance WebSocket API --> python script --> Event Hubs instance --> Stream Analytics job --> output
 
 ## Configuring Stream Analytics job
 1. Add Input - streaming data from Event Hub instance
@@ -47,7 +49,7 @@ My Stream Analytics job can now receive the streaming data. The flow of the data
 
 Main focus for the [query](https://github.com/tanchu-git/stream_analytics_btc/blob/main/stream_query/query.sql) is 'AnomalyDetection_SpikeAndDip'. As the name suggest, it detects temporary anomalies in a time series event. The underlying machine learning model uses the adaptive kernel density estimation algorithm. It supports unsupervised learning and real time scoring, whereby it will learn from the data. More details is in [stream_query](https://github.com/tanchu-git/stream_analytics_btc/blob/main/stream_query/query.sql).
 
-Let's go through the query results part by part-
+### Let's go through the different CTEs in the query -
 
 #### Raw stream data from python_app
 ![Screenshot 2023-08-09 231218](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/66a1c5bd-762b-4328-a56b-8b779813069e)
