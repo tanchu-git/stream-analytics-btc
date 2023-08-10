@@ -1,5 +1,5 @@
 # Mini Project with Azure Stream Analytics
-Exploringand learning Azure Event Hubs and Azure Stream Analytics. Where I try to use Stream Analytics to analyze Bitcoin trading stream from Binance in real-time for anomalies.
+Exploring and learning Azure Event Hubs and Azure Stream Analytics. Where I try to use Stream Analytics to analyze Bitcoin trading stream from Binance in real-time for anomalies.
 
 ## Python script
 Binance offers a simple WebSocket API for real-time trading data. I did some light processing on the raw streaming data before sending it to Azure Event Hubs. Detailed comments in [```python_script```](https://github.com/tanchu-git/stream_analytics_btc/blob/main/python_script/btc_stream.py).
