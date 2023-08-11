@@ -54,16 +54,19 @@ Main focus for the [query](https://github.com/tanchu-git/stream_analytics_btc/bl
 #### Raw stream data from python_app
 ![Screenshot 2023-08-09 231218](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/66a1c5bd-762b-4328-a56b-8b779813069e)
 
-#### CTE with TUMBLINGWINDOW of 1 second
+#### CTE with ```TUMBLINGWINDOW``` of 1 second
+![Screenshot 2023-08-11 135757](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/cea2c3c8-728c-4530-bcf8-167ea491316a)
 ![Screenshot 2023-08-09 231312](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/a68e5498-20bb-4ee3-a885-4a2a825ff772)
 
 #### CTE with machine learning model applied
+![Screenshot 2023-08-11 135825](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/7bcbc5cc-67f0-4d4b-8921-7558139a931c)
 ![Screenshot 2023-08-09 231454](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/f22dbb13-6e45-44b6-9a60-92bbc7345141)
 
 #### CTE with flattened nested record
+![Screenshot 2023-08-11 135837](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/497ff9de-494c-4f44-a97b-efce53435852)
 ![Screenshot 2023-08-09 231542](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/6bbcc052-564f-4e51-bbe4-8581428f8bd7)
 
-#### Final result
+#### Final ```SELECT``` with ```MATCH_RECOGNIZE``` clause
 ![Screenshot 2023-08-09 232834](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/e578c38e-fd09-4162-8b99-bbc0b46d60e5)
 
-As fun as the [query](https://github.com/tanchu-git/stream_analytics_btc/blob/main/stream_query/query.sql) was to write, it's utterly useless. Let's just blame it on bitcoin being too stable.
+As fun as the whole [query](https://github.com/tanchu-git/stream_analytics_btc/blob/main/stream_query/query.sql) was to write, ```AnomalyDetection_SpikeAndDip``` is clearly not suitable for analyzing trading price movements.
