@@ -32,7 +32,7 @@ anomalies_result AS
     FROM anomaly_detection
 )    
 -- The machine learning model is finicky at best. 
--- Using MATCH_RECOGNIZE clause to define 4 consecutive anomalies following 1 normal event as spike or dip.
+-- Using MATCH_RECOGNIZE clause to define 4 consecutive anomalies following 1 or more normal event as spike or dip.
 SELECT
     *
 INTO [btc-anomaly]
