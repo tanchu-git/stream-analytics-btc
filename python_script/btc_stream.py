@@ -5,6 +5,8 @@ from azure.eventhub import EventHubProducerClient, EventData
 from binance.websocket.spot.websocket_stream import SpotWebsocketStreamClient
 
 ''' 
+Making this script asynchronous would be the better choice, but I'm not losing any data so not going to bother.
+
 Using temporary environment variables to store Service Principal credentials. 
 os.environ["AZURE_TENANT_ID"]
 os.environ["AZURE_CLIENT_ID"]
