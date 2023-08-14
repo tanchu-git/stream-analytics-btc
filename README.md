@@ -37,7 +37,7 @@ Assigning my Stream Analytics job ```event_hub_stream``` as ```Azure Event Hubs 
 
 My Stream Analytics job can now receive the streaming data from my Event Hub instance. The flow of the data:
 
-```Binance WebSocket API --> python script --> Event Hubs instance --> Stream Analytics job --> output```
+```python script --> Event Hubs instance --> Stream Analytics job --> output```
 
 ## Configuring Stream Analytics job
 1. Add Input - streaming data from Event Hub instance
