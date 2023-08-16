@@ -78,13 +78,13 @@ I will need to extract and transform one day's worth of data from the raw stream
 
 ![Screenshot 2023-08-16 182958](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/eabd67bb-8ce1-4c08-a4d9-ddaed9e2bb09)
 
-Having to manually input the time values into the parameters is inefficient, so I will make use of a Scheduled Trigger and pass the scheduled time as the value for the parameters. By scheduling the pipeline to run every day at 23:59 - ```windowEnd``` will use this scheduled time as its value, and ```windowStart``` will substract 24 hours from the scheduled time.
+Manual input of the time values into the parameters is inefficient, so I will make use of a Scheduled Trigger and pass the scheduled time as the value for the parameters. By scheduling the pipeline to run every day at 23:59 - ```windowEnd``` will use this scheduled time as its value, and ```windowStart``` will substract 24 hours from the scheduled time.
 
 ![Screenshot 2023-08-16 182608](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/c4d31e67-8185-4c36-aaa9-687e20d3cfe5)
 
 With the incremental load done, I can now design the Data Flow. 
 
-![Screenshot 2023-08-16 190525](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/c992ecac-7df4-489a-9217-5cc56bf4ee94)
+![Screenshot 2023-08-16 203900](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/696a4068-eb7c-40dc-93a2-ff4140cd0853)
 
 Everyday at midnight, new row will be added to the new table.
 
