@@ -70,3 +70,24 @@ Main focus for the [query](https://github.com/tanchu-git/stream_analytics_btc/bl
 ![Screenshot 2023-08-09 232834](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/e578c38e-fd09-4162-8b99-bbc0b46d60e5)
 
 As fun as the whole [query](https://github.com/tanchu-git/stream_analytics_btc/blob/main/stream_query/query.sql) was to write, ```AnomalyDetection_SpikeAndDip``` is clearly not suitable for analyzing trading price movements.
+
+## Azure Data Factory
+As the raw stream data goes directly into a specified Azure SQL Database, I should at least make something useful out of it. Like a daily historical trading table using Data Factory.
+
+I will need to extract and transform one day's worth of data from the raw stream, into one row of data for the new table. First is a pipeline with a ```COPY``` activity and the necessary linked service and source/sink datasets. Then, two parameters (```windowStart``` and ```windowEnd```). The parameters will define the boundaries of a time window, in this case, 24 hours. With this window matched against the source table's ```DATETIME```column ```EventEnqueuedUtcTime```, only records within the time window will be copied over to a staging storage.
+
+![Screenshot 2023-08-16 182958](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/eabd67bb-8ce1-4c08-a4d9-ddaed9e2bb09)
+
+Having to manually input the time values into the parameters is inefficient, so I will make use of a Scheduled Trigger and pass the scheduled time as the value for the parameters. By scheduling the pipeline to run every day at 23:59 - ```windowEnd``` will use this scheduled time as its value, and ```windowStart``` will substract 24 hours from the scheduled time.
+
+![Screenshot 2023-08-16 182608](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/c4d31e67-8185-4c36-aaa9-687e20d3cfe5)
+
+With the incremental load done, I can now design the Data Flow. 
+
+![Screenshot 2023-08-16 190525](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/c992ecac-7df4-489a-9217-5cc56bf4ee94)
+
+Everyday at midnight, new row will be added to the new table.
+
+![Screenshot 2023-08-16 202835](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/1bfce196-f728-42e4-8f07-cb489f835a91)
+
+P.S. Query result above isn't fully representative of the trading data (streaming data for 24 hours and more is quite expensive). :blush:
