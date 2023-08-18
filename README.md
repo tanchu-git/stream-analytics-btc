@@ -74,7 +74,7 @@ As fun as the whole [query](https://github.com/tanchu-git/stream_analytics_btc/b
 ## Azure Data Factory
 As the raw stream data goes directly into a specified Azure SQL Database, I should at least make something useful out of it. Like a daily historical trading table using Data Factory.
 
-I will need to extract and transform one day's worth of data from the raw stream. First is a pipeline with a ```COPY``` activity and the necessary linked service and source/sink datasets. Then, two parameters (```windowStart``` and ```windowEnd```). The parameters will define the boundaries of a time window, in this case, 24 hours. With this window matched against the source table's ```DATETIME```column ```EventEnqueuedUtcTime```, only records within the time window will be copied over to a staging storage.
+I will need to extract and transform one day's worth of data from the raw stream. First is a pipeline with a ```COPY``` activity and the necessary linked service and source/sink datasets. Then, two parameters (```windowStart``` and ```windowEnd```). The parameters will define the boundaries of a time window, in this case, 24 hours. With this window matched against the source table's ```DATETIME``` column ```EventEnqueuedUtcTime```, only records within the time window will be copied over to a staging storage.
 
 ![Screenshot 2023-08-16 182958](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/eabd67bb-8ce1-4c08-a4d9-ddaed9e2bb09)
 
