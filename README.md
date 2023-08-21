@@ -95,6 +95,7 @@ anomalies_result AS
 ![Screenshot 2023-08-09 231542](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/6bbcc052-564f-4e51-bbe4-8581428f8bd7)
 
 #### Final ```SELECT``` with ```MATCH_RECOGNIZE``` clause
+```sql
 SELECT
     *
 INTO [btc-anomaly]
