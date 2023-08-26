@@ -29,23 +29,16 @@ producer = EventHubProducerClient(
     credential = credential
     )        
 
+new_keys = ["Type", "Event Time", "Symbol", "Trade ID", "Price", "Quantity", 
+           "Buyer order ID", "Seller Order ID", "Trade time", "Market Maker", "Ignore"]
 # Function to rename dictionary keys. 
 # SQL considers uppercase and lowercase letters as duplicates.
-def rename_keys(dictionary):
-    try:
-        dictionary["Type"] = dictionary.pop("e")
-        dictionary["Event Time"] = dictionary.pop("E")
-        dictionary["Symbol"] = dictionary.pop("s")
-        dictionary["Trade ID"] = dictionary.pop("t")
-        dictionary["Price"] = dictionary.pop("p")
-        dictionary["Quantity"] = dictionary.pop("q")
-        dictionary["Buyer order ID"] = dictionary.pop("b")
-        dictionary["Seller Order ID"] = dictionary.pop("a")
-        dictionary["Trade time"] = dictionary.pop("T")
-        dictionary["Market Maker"] = dictionary.pop("m")
-        dictionary["Ignore"] = dictionary.pop("M")
-        return dictionary
-    except KeyError:
+def rename_keys(dict):
+    if len(dict) > 5:
+        for index, key in enumerate(dict):
+            dict[new_keys[index]] = dict.pop(key)
+        return dict
+    else:
         pass
 
 # Function to process messages and send them to event hub.
