@@ -34,7 +34,7 @@ new_keys = ["Type", "Event Time", "Symbol", "Trade ID", "Price", "Quantity",
 # Function to rename dictionary keys. 
 # SQL considers uppercase and lowercase letters as duplicates.
 def rename_keys(old_dict):
-    if len(dict) > 5:
+    if len(old_dict) > 5:
         zipped_dict = dict(zip(keys, old_dict.values()))
         return zipped_dict
     else:
