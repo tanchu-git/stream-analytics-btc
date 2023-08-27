@@ -29,13 +29,13 @@ producer = EventHubProducerClient(
     credential = credential
     )        
 
-new_keys = ["Type", "Event Time", "Symbol", "Trade ID", "Price", "Quantity", 
-           "Buyer order ID", "Seller Order ID", "Trade time", "Market Maker", "Ignore"]
 # Function to rename dictionary keys. 
 # SQL considers uppercase and lowercase letters as duplicates.
 def rename_keys(old_dict):
+    new_keys = ["Type", "Event Time", "Symbol", "Trade ID", "Price", "Quantity", 
+           "Buyer order ID", "Seller Order ID", "Trade time", "Market Maker", "Ignore"]
     if len(old_dict) > 5:
-        zipped_dict = dict(zip(keys, old_dict.values()))
+        zipped_dict = dict(zip(new_keys, old_dict.values()))
         return zipped_dict
     else:
         pass
