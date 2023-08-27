@@ -27,15 +27,16 @@ producer = EventHubProducerClient(
     fully_qualified_namespace = EVENT_HUB_FULLY_QUALIFIED_NAMESPACE,
     eventhub_name = EVENT_HUB_NAME,
     credential = credential
-    )        
+    )
 
+new_keys = ["Type", "Event Time", "Symbol", "Trade ID", "Price", "Quantity",
+            "Buyer order ID", "Seller Order ID", "Trade time", "Market Maker", "Ignore"]
 # Function to rename dictionary keys. 
 # SQL considers uppercase and lowercase letters as duplicates.
-def rename_keys(old_dict):
-    new_keys = ["Type", "Event Time", "Symbol", "Trade ID", "Price", "Quantity", 
-           "Buyer order ID", "Seller Order ID", "Trade time", "Market Maker", "Ignore"]
+def rename_keys(keys, old_dict):
+
     if len(old_dict) > 5:
-        zipped_dict = dict(zip(new_keys, old_dict.values()))
+        zipped_dict = dict(zip(keys, old_dict.values()))
         return zipped_dict
     else:
         pass
@@ -44,7 +45,7 @@ def rename_keys(old_dict):
 # Convert string message to dictionary. Pass dictionary into rename_keys function.
 def process_message(_, message):
     string_to_dict = json.loads(message)
-    dict_renamed = rename_keys(string_to_dict)
+    dict_renamed = rename_keys(new_keys, string_to_dict)
 
     if dict_renamed is not None:
         # Convert dictionary to JSON string. Add to batch and send.
