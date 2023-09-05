@@ -1,7 +1,10 @@
 # Mini Project with Azure Stream Analytics
 Exploring and learning Azure Event Hubs and Azure Stream Analytics. Where I try to use Stream Analytics to analyze Bitcoin trading stream from Binance in real-time for anomalies.
 
-## Python script
+## Solution Architecture
+![Screenshot 2023-09-05 225748](https://github.com/tanchu-git/stream_analytics_btc/assets/139019601/8ae55a21-57e9-40b0-bf42-95eed0b8966a)
+
+## Python Script
 Binance offers a simple WebSocket API for real-time trading data. I did some light processing on the raw streaming data before sending it to Azure Event Hubs. Detailed comments in [```python_script```](https://github.com/tanchu-git/stream_analytics_btc/blob/main/python_script/btc_stream.py).
 
 With the app registration process in Azure Active Directory, I registered a new application service principal object. The identity (```tenant ID```, ```client ID``` and ```client secret```) of the ```Service Principal``` is then stored as environment variables to be accessed by the python script for authentication with Azure services.
