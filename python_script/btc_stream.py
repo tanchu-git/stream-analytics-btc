@@ -31,24 +31,23 @@ producer = EventHubProducerClient(
 
 new_keys = ["Type", "Event Time", "Symbol", "Trade ID", "Price", "Quantity",
             "Buyer order ID", "Seller Order ID", "Trade time", "Market Maker", "Ignore"]
+
 # Function to rename dictionary keys. 
 # SQL considers uppercase and lowercase letters as duplicates.
 def rename_keys(keys, old_dict):
-    if len(old_dict) > 5:
         zipped_dict = dict(zip(keys, old_dict.values()))
         return zipped_dict
-    else:
-        pass
 
 # Function to process messages and send them to event hub.
-# Convert string message to dictionary. Pass dictionary into rename_keys function.
+# Convert string message to dictionary. 
 def process_message(_, message):
-    string_to_dict = json.loads(message)
-    dict_renamed = rename_keys(new_keys, string_to_dict)
+    string_to_dict = json.loads(message)    
 
-    if dict_renamed is not None:
-        # Convert dictionary to JSON string. Add to batch and send.
+    if len(string_to_dict) > 2:
+        # Pass dictionary into rename_keys function.
+        dict_renamed = rename_keys(new_keys, string_to_dict)        
         event_data_batch = producer.create_batch()
+        # Convert dictionary to JSON string. Add to batch and send.
         event_data = EventData(json.dumps(dict_renamed))
         try:
             event_data_batch.add(event_data)
@@ -56,6 +55,7 @@ def process_message(_, message):
             producer.send_batch(event_data_batch)
             event_data_batch = producer.create_batch()
             event_data_batch.add(event_data)
+            print("Batch full. FLushed!")
         finally:
             producer.send_batch(event_data_batch)
             print("Data sent.")
