@@ -5,7 +5,7 @@ import pytest
 # pip install binance-connector
 from binance.websocket.spot.websocket_stream import SpotWebsocketStreamClient
 
-# Storing event messages (raw and formatted) in lists to test
+# Storing event messages (formatted) in lists to test
 MESSAGES = []
 def process_message(_, message):
         MESSAGES.append(json.loads(message))
