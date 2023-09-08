@@ -5,7 +5,7 @@ import pytest
 # pip install binance-connector
 from binance.websocket.spot.websocket_stream import SpotWebsocketStreamClient
 
-# Storing event messages (formatted) in lists to test
+# Storing stream messages (formatted) in lists to test.
 MESSAGES = []
 
 def process_message(_, message):
@@ -14,7 +14,7 @@ def process_message(_, message):
 @pytest.fixture(scope="module")
 def start_stream():
     """
-    Return a connection to websocket stream
+    Return a connection to websocket stream.
     """
     stream = SpotWebsocketStreamClient(on_message=process_message)
     stream.trade(symbol="btcusdt")
@@ -27,7 +27,7 @@ def start_stream():
 @pytest.fixture()
 def new_keys():
     """
-    Return new key names for dictionary
+    Return new key names for dictionary.
     """
     return [
         "Type",
@@ -48,18 +48,20 @@ def test_first_message(start_stream):
     assert len(MESSAGES[0]) == 2
     assert MESSAGES[0]["result"] is None
 
-def test_second_message(start_stream):
+def test_remaining_messages(start_stream):
     for msg in MESSAGES[1:]:
-        assert type(MESSAGES[1]) == dict
-        assert len(MESSAGES[1]) == 11
+        assert type(msg) == dict
+        assert len(msg) == 11
 
-def test_rename_keys(new_keys, start_stream):
-    zipped_dict = dict(zip(new_keys, MESSAGES[1].values()))
-    assert len(zipped_dict) == 11
-    assert list(zipped_dict.keys()) == new_keys
-    assert str(zipped_dict.values()) == str(MESSAGES[1].values())
+def test_renaming_keys(new_keys, start_stream):
+    # Excluding the first one, it is irrelevant.
+    for msg in MESSAGES[1:]:
+        zipped_dict = dict(zip(new_keys, msg.values()))
+        assert len(zipped_dict) == 11
+        assert list(zipped_dict.keys()) == new_keys
+        assert str(zipped_dict.values()) == str(msg.values())
 
-# Test the first message unformatted
+# Test the first message unformatted.
 def test_raw_message():
     def msg(_, message):
         global raw_message
