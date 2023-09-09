@@ -19,9 +19,8 @@ def stream_messages():
 
     stream = SpotWebsocketStreamClient(on_message=process_message)
     stream.trade(symbol="btcusdt")
-    time.sleep(1)
+    time.sleep(1.5)
     stream.stop()
-    
     return messages, raw_messages
 
 @pytest.fixture()
@@ -54,6 +53,8 @@ def test_first_message(stream_messages):
 
 def test_remaining_messages(stream_messages):
     messages, _ = stream_messages
+    assert len(messages) > 1
+
     for msg in messages[1:]:
         assert type(msg) == EXPECTED_DICT
         assert len(msg) == EXPECTED_ITEMS_COUNT
@@ -61,6 +62,7 @@ def test_remaining_messages(stream_messages):
 def test_renaming_keys(new_keys, stream_messages):
     messages, _ = stream_messages
     expected_keys = new_keys
+    assert len(messages) > 1
 
     # Excluding the first one, it is irrelevant.
     for msg in messages[1:]:
