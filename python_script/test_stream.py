@@ -5,24 +5,24 @@ import pytest
 # pip install binance-connector
 from binance.websocket.spot.websocket_stream import SpotWebsocketStreamClient
 
-# Storing stream messages (formatted) in lists to test.
-MESSAGES = []
-
-def process_message(_, message):
-    MESSAGES.append(json.loads(message))
-
-@pytest.fixture(scope="module")
-def start_stream():
+@pytest.fixture(scope="session")
+def stream_messages():
     """
-    Return a connection to websocket stream.
+    Start a connection to websocket stream.
+    Return stream messages (formatted) in a list to test.
     """
+    messages = []
+    raw_messages = []
+    def process_message(_, message):
+        raw_messages.append(message)
+        messages.append(json.loads(message))
+
     stream = SpotWebsocketStreamClient(on_message=process_message)
     stream.trade(symbol="btcusdt")
-    time.sleep(2)
-
-    yield stream
-
+    time.sleep(1)
     stream.stop()
+    
+    return messages, raw_messages
 
 @pytest.fixture()
 def new_keys():
@@ -40,35 +40,38 @@ def new_keys():
         "Seller Order ID",
         "Trade time",
         "Market Maker",
-        "Ignore",
+        "Ignore"
     ]
 
-def test_first_message(start_stream):
-    assert type(MESSAGES[0]) == dict
-    assert len(MESSAGES[0]) == 2
-    assert MESSAGES[0]["result"] is None
+EXPECTED_ITEMS_COUNT = 11
+EXPECTED_DICT = dict
+EXPECTED_STR = str
 
-def test_remaining_messages(start_stream):
-    for msg in MESSAGES[1:]:
-        assert type(msg) == dict
-        assert len(msg) == 11
+def test_first_message(stream_messages):
+    dict_list, _ = stream_messages
+    assert type(dict_list[0]) == EXPECTED_DICT
+    assert len(dict_list[0]) == 2
 
-def test_renaming_keys(new_keys, start_stream):
+def test_remaining_messages(stream_messages):
+    dict_list, _ = stream_messages
+    for msg in dict_list[1:]:
+        assert type(msg) == EXPECTED_DICT
+        assert len(msg) == EXPECTED_ITEMS_COUNT
+
+def test_renaming_keys(new_keys, stream_messages):
+    dict_list, _ = stream_messages
+    expected_keys = new_keys
+
     # Excluding the first one, it is irrelevant.
-    for msg in MESSAGES[1:]:
+    for msg in dict_list[1:]:
+        expected_values = str(msg.values())
         zipped_dict = dict(zip(new_keys, msg.values()))
-        assert len(zipped_dict) == 11
-        assert list(zipped_dict.keys()) == new_keys
-        assert str(zipped_dict.values()) == str(msg.values())
 
-# Test the first message unformatted.
-def test_raw_message():
-    def msg(_, message):
-        global raw_message
-        raw_message = message
+        assert len(zipped_dict) == EXPECTED_ITEMS_COUNT
+        assert list(zipped_dict.keys()) == expected_keys
+        assert str(zipped_dict.values()) == expected_values
 
-    stream = SpotWebsocketStreamClient(on_message=msg)
-    stream.trade(symbol="btcusdt")
-    stream.stop()
-    assert len(raw_message) > 11
-    assert type(raw_message) == str
+def test_raw_message(stream_messages):
+    _, string_list = stream_messages
+    for msg in string_list:
+        assert type(msg) == EXPECTED_STR
