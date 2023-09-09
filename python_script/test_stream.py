@@ -9,7 +9,7 @@ from binance.websocket.spot.websocket_stream import SpotWebsocketStreamClient
 def stream_messages():
     """
     Start a connection to websocket stream.
-    Return stream messages (formatted) in a list to test.
+    Return stream messages (formatted and raw) in lists to test.
     """
     messages = []
     raw_messages = []
@@ -48,22 +48,22 @@ EXPECTED_DICT = dict
 EXPECTED_STR = str
 
 def test_first_message(stream_messages):
-    dict_list, _ = stream_messages
-    assert type(dict_list[0]) == EXPECTED_DICT
-    assert len(dict_list[0]) == 2
+    messages, _ = stream_messages
+    assert type(messages[0]) == EXPECTED_DICT
+    assert len(messages[0]) == 2
 
 def test_remaining_messages(stream_messages):
-    dict_list, _ = stream_messages
-    for msg in dict_list[1:]:
+    messages, _ = stream_messages
+    for msg in messages[1:]:
         assert type(msg) == EXPECTED_DICT
         assert len(msg) == EXPECTED_ITEMS_COUNT
 
 def test_renaming_keys(new_keys, stream_messages):
-    dict_list, _ = stream_messages
+    messages, _ = stream_messages
     expected_keys = new_keys
 
     # Excluding the first one, it is irrelevant.
-    for msg in dict_list[1:]:
+    for msg in messages[1:]:
         expected_values = str(msg.values())
         zipped_dict = dict(zip(new_keys, msg.values()))
 
@@ -72,6 +72,6 @@ def test_renaming_keys(new_keys, stream_messages):
         assert str(zipped_dict.values()) == expected_values
 
 def test_raw_message(stream_messages):
-    _, string_list = stream_messages
-    for msg in string_list:
+    _, raw_messages = stream_messages
+    for msg in raw_messages:
         assert type(msg) == EXPECTED_STR
