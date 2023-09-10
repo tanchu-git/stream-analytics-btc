@@ -13,14 +13,16 @@ def stream_messages():
     """
     messages = []
     raw_messages = []
+
     def process_message(_, message):
         raw_messages.append(message)
         messages.append(json.loads(message))
 
     stream = SpotWebsocketStreamClient(on_message=process_message)
     stream.trade(symbol="btcusdt")
-    time.sleep(1.5)
+    time.sleep(2)
     stream.stop()
+
     return messages, raw_messages
 
 @pytest.fixture()
@@ -48,23 +50,25 @@ EXPECTED_STR = str
 
 def test_first_message(stream_messages):
     messages, _ = stream_messages
-    assert type(messages[0]) == EXPECTED_DICT
-    assert len(messages[0]) == 2
+    first_message = messages[0]    
+    assert type(first_message) == EXPECTED_DICT
+    assert len(first_message) == 2
 
 def test_remaining_messages(stream_messages):
     messages, _ = stream_messages
     assert len(messages) > 1
 
+    # Skip first message.
     for msg in messages[1:]:
         assert type(msg) == EXPECTED_DICT
         assert len(msg) == EXPECTED_ITEMS_COUNT
 
-def test_renaming_keys(new_keys, stream_messages):
+def test_rename_keys(new_keys, stream_messages):
     messages, _ = stream_messages
     expected_keys = new_keys
     assert len(messages) > 1
 
-    # Excluding the first one, it is irrelevant.
+    # Skip first message.
     for msg in messages[1:]:
         expected_values = str(msg.values())
         zipped_dict = dict(zip(new_keys, msg.values()))
