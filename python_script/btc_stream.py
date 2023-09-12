@@ -1,6 +1,7 @@
 import os
 import time
 import json
+
 from azure.identity import DefaultAzureCredential
 from azure.eventhub import EventHubProducerClient, EventData
 from binance.websocket.spot.websocket_stream import SpotWebsocketStreamClient
@@ -62,15 +63,19 @@ def process_message(_, message):
             print("Data sent.")
 
 # Initialize streaming client and start it. 
-# Pass message recieved to process_message function.
-stream = SpotWebsocketStreamClient(on_message=process_message) 
-stream.trade(symbol="btcusdt")
+def main():
+    # Pass message recieved to process_message function.
+    stream = SpotWebsocketStreamClient(on_message=process_message) 
+    stream.trade(symbol="btcusdt")
 
-# Leave stream open for * seconds.
-time.sleep(600)
+    # Leave stream open for * seconds.
+    time.sleep(5)
 
-# Close connections to services.
-stream.stop()
-producer.close()
-credential.close()
-print('Streaming closed.')
+    # Close connections to services.
+    stream.stop()
+    producer.close()
+    credential.close()
+    print('Streaming closed.')
+
+if __name__ == "__main__":
+     main()
