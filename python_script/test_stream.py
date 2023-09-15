@@ -8,13 +8,13 @@ def stream_message():
             '"q":"0.00380000","b":22343123975,"a":22343123438,"T":1694726183301,"m":false,"M":true}')
 
 # Variables and 'pytest_generate_tests' function for parametrization.
-first_message = '{"result":null,"id":1694784292276}'
-second_message = ('{"e":"trade","E":1694726183301,"s":"BTCUSDT","t":3212504520,"p":"26596.52000000",'
+FIRST_MESSAGE = '{"result":null,"id":1694784292276}'
+SECOND_MESSAGE = ('{"e":"trade","E":1694726183301,"s":"BTCUSDT","t":3212504520,"p":"26596.52000000",'
                   '"q":"0.00380000","b":22343123975,"a":22343123438,"T":1694726183301,"m":false,"M":true}')
 
 def pytest_generate_tests(metafunc):
     if "messages" in metafunc.fixturenames:
-        metafunc.parametrize("messages", [first_message, second_message])
+        metafunc.parametrize("messages", [FIRST_MESSAGE, SECOND_MESSAGE])
 
 EXPECTED_ITEMS_COUNT = 11
 EXPECTED_DICT = dict
